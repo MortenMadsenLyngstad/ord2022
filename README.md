@@ -1,92 +1,114 @@
-# exam
+# Eksamen Vår 2022
 
-Repo for ordinær våreksamen 6. juni 2022
+Oppgaven består av følgende deler, som ligger inne i hver sin java-**pakke** (undermapper under **src/main/java**). Noen deler kan ha samme pakke hvis de benytter seg av samme klasser.
 
-## Getting started
+- Del X
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+## Oppgaveformat
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+Oppgavebeskrivelsene finner dere under hver del. Det vil si at **src/main/java/del1/del1.md** inneholder oppgavebeskrivelsen for del 1, og så videre.
 
-## Add your files
+Oppgavene har en tekstbeskrivelse, men denne er ikke alltid utfyllende. De mest utfyllende kravene til en metode står i dens javadoc-beskrivelse, altså en kommentar som står før metoden selv i kildekoden. I utgangspunktet trenger dere kunne å bruke .md-filene for å navigere til riktige klasser som faktisk skal implementeres, alt av krav til metoder står i selve Java-docen. Det er likevel i mange oppgaver spesifisert hvilke metoder som skal implementeres, og hva disse skal gjøre, men dette står da og i Java-docen, og kun Java-docen inneholder informasjon om f.eks Exceptions som skal utløses. Dersom du mener at Java-docs og oppgavebeskrivelse inneholder motstridende informasjon, ta først og fremst hensyn til det som står i Java-docen.  
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+Et web-view av Java-docen kan og bli sett ved å åpne filen doc/index.html prosjektet.
 
+Hvis du ikke skulle klare å implementere en metode i en del kan du selvfølgelig bruke denne videre som om den virket (som i tidligere 'papireksamener'). Merk at metoden bør fortsatt kompilere. Dette kan oppnås ved å legge inn såkalte **dummy**-returverdier som er verdier av riktig **type** som alltid returnerer det samme, men som da ikke er den korrekte returverdien for det enkelte tilfellet som testes. Et eksempel på en metode hvor man har gjort dette kan sees nedenfor:
+
+```java
+public int calculcateNumber(double param) {
+    // Noe uferdig kode her...
+    return 0; // dummy-verdi
+}
 ```
-cd existing_repo
-git remote add origin https://gitlab.stud.idi.ntnu.no/tdt4100/v2022/exam.git
-git branch -M main
-git push -uf origin main
-```
 
-## Integrate with your tools
+Kræsj i koden, som **NullPointerException** og lignende, samt kode som ikke kompilerer vil fortsatt bli vurdert, men vil selvfølgelig ikke gi full poengsum. Dere bør teste deres egen kode slik at dere vet at denne kjører. For å hjelpe med dette har de fleste deler en main-metode som inneholder noe kode for å teste implementeringen. Disse main-metodene er ikke dekkende og tester ikke alle tilfeller (i motsetning til hva man kanskje er vant med på øvingsopplegget) så du oppfordres til å utvide med egne tester. Denne koden bør fortsatt kompilere, men trenger ikke fjernes ved levering.
 
-- [ ] [Set up project integrations](https://gitlab.stud.idi.ntnu.no/tdt4100/v2022/exam/-/settings/integrations)
+## Navigering
 
-## Collaborate with your team
+Oppgavebeskrivelsene kan brukes som hjelp til å navigere til riktige filer. Når du har åpent en **.md**-fil kan du trykke på følgende ikon oppe i høyre hjørne for å få dette i split-view på høyre side og på en mer leselig måte:
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Automatically merge when pipeline succeeds](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
+<img src="images/Open_Preview.png" alt="drawing" width="600"/>
 
-## Test and Deploy
+Alle metodene dere skal fylle inn er og markert med `//TODO` inne i selve Java-filene.
 
-Use the built-in continuous integration in GitLab.
+## Besvarelse
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+*Oppgaveteksten* finnes i **delX.md**-filer og andre md-filer i prosjektet og kan leses både på gitlab og i IDE-en. Versjoner på nynorsk og engelsk finnes i egne filer.
 
-***
+Oppgaven *besvares* ved å bygge videre på kode-filene som er der, og fylle inn evt antakelser du gjør, i en separat md-fil (**oppgavekommentarer.md**)
 
-# Editing this README
+## Nedlasting og import
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!).  Thank you to [makeareadme.com](https://www.makeareadme.com/) for this template.
+*Nedlasting* og *import* skjer enten ved å laste ned en zip-fil fra repository-siden på gitlab eller Inspera, eller ved å klone git-repoet. Fremgangsmåten avhenger av hvilken IDE du bruker:
 
-## Suggestions for a good README
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+### Import i VSCode
 
-## Name
-Choose a self-explaining name for your project.
+Ved *import av zip-fil* så trykker du på **File -> Open Folder ...**. Naviger deretter til den nedlastede zip-filen (husk og åpne zip-filen først) og velg mappen som gjør at pom.xml filen ligger inne i denne. Ved import av zip-fil bør du og bytte navn på prosjektet hvis du laster det ned på forhånd, så du ikke får konflikt med navngivning når du skal laste ned selve eksamen.
 
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+*Import med kloning* skjer med en annen veiviser, som  beskrevet på følgende wiki-side: <https://www.ntnu.no/wiki/pages/viewpage.action?pageId=234489370>. Lenken en da kan bruke til å klone er *<https://gitlab.stud.idi.ntnu.no/tdt4100/v2022/exam>*.
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+Dersom det blir konflikter når dere puller kan du åpne et terminalvindu inne i VSCode-vinduet ditt og skrive kommandoen `git stash`.
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+### Import i Eclipse
 
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+Ved *import av zip-fil*, så skal veiviseren **Import > Maven > Existing Maven Projects** brukes. Naviger til den nedlastede zip-filen (husk og åpne zip-filen først) og velg mappen som gjør at pom.xml filen ligger inne i denne. Ved import av zip-fil bør du og bytte navn på prosjektet hvis du laster det ned på forhånd, så du ikke får konflikt med navngivning når du skal laste ned selve eksamen.
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+*Import med kloning* skjer med en annen veiviser, som  beskrevet på følgende wiki-side:  <https://www.ntnu.no/wiki/display/tdt4100/Importere+kode+fra+git>. Lenken en da kan bruke til å klone er *<https://gitlab.stud.idi.ntnu.no/tdt4100/v2022/exam>*.
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+Dersom det blir konflikter når dere puller kan dere høyreklikke og *Replace with > Head Revision* på prosjektet.
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+## Levering
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
+Når eksamen skal leveres kan du gjøre dette på denne måten, avhengig av hvilken IDE du bruker:
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+### Levering i VSCode
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+**Zippe i Windows**
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+- Høyreklikk på et **tomt område** i 'Explorer' helt til venstre i VSCode. Dette vil være under 'nederste' fil i ytterste mappe.
+- Velg **'Reveal in File Explorer'** fra nedtrekksmenyen som dukker opp.
+- Du skal nå få opp et utforskervindu (ikke i VSCode, men i Windows). Her skal mappen som inneholder prosjektfolderen vi skal komprimere allerede være markert, men dobbeltsjekk at dette stemmer.
+- Høyreklikk på prosjektmappen (den skal hete **exam** eller tilsvarende hvis du har endret navn)
+- Velg **'Send til' -> 'Komprimert (zippet) mappe'**.
+- Windows komprimerer nå prosjektmappen **exam**, og spør deg hva den skal kalles. La den hete det som foreslås.
+- Denne zipfilen er filen dere skal laste opp til Inspera til slutt.
+- Dere finner et par bilder av prosessen til slutt i denne filen.
 
-## License
-For open source projects, say how it is licensed.
+**Zippe i macOS (OS X)**
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+- Følg instruksjonene som for Windows overfor, men ting har andre navn.
+- Høyreklikk på et tomt område i **Explorer** helt til venstre i VSCode og velg **'Reveal in Finder'**
+- Høyreklikk prosjektmappen som nå skal være markert og velg **'Komprimer'**.
+- Filen du får er den som skal lastes opp til Inspera.
+
+### Levering i Eclipse
+
+**Zippe i Windows**
+
+- Høyreklikk på prosjektikonet i 'Package Explorer' helt til venstre i Eclipse.
+- Velg **'Show in' -> click 'System Explorer'**.
+- Du skal nå få opp et utforskervindu (ikke i Eclipse, men i Windows) som står åpent i en mappe som skal inneholder prosjektfolderen vi skal komprimere.
+- Høyreklikk prosjektfolderen (den skal hete **exam**)
+- Velg meny **'Send til' -> 'Komprimert (zippet) mappe'**.
+- Windows komprimerer nå prosjektfolderen **exam**, og spør deg hva den skal kalles La den hete det som foreslås.
+- Denne zipfilen er filen dere skal laste opp til Inspera til slutt.
+- Dere finner et par bilder av prosessen til slutt i denne filen.
+
+**Zippe i macOS (OS X)**
+
+- Følg instruksjonene som for Windows overfor, men ting har andre navn.
+- Høyreklikk prosjektet i Eclipse -> **'Åpne i Finder'**
+- Høyreklikk prosjektmapen og velg **'Komprimer'**.
+- Filen du får er den som skal lastes opp til Inspera.
+
+**System Explorer i VSCode**
+
+<img src="images/System_Explorer_VSCode.png" alt="drawing" width="600"/>
+
+**System Explorer i Eclipse**
+
+<img src="images/System_Explorer.png" alt="drawing" width="600"/>
+
+**Komprimering av eksamensbesvarelse**
+
+<img src="images/Compress.png" alt="drawing" width="600"/>
