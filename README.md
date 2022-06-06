@@ -5,11 +5,11 @@
 
 Oppgaven består av følgende deler, som ligger inne i hver sin pakke.
 
-- [Del 1](src/main/java/part1/part1.md)
-- [Del 2](src/main/java/part2/part2.md) 
-- [Del 3](src/main/java/part3/part3.md) 
-- [Del 4](src/main/java/part4/part4.md) 
-- [Del 4](src/main/java/part5/part5.md) 
+- [Del 1](src/main/java/part1/part1_nb.md)
+- [Del 2](src/main/java/part2/part2_nb.md) 
+- [Del 3](src/main/java/part3/part3_nb.md) 
+- [Del 4](src/main/java/part4/part4_nb.md) 
+- [Del 4](src/main/java/part5/part5_nb.md) 
 
 ## Oppgaveformat
 
