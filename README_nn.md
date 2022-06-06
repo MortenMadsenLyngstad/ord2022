@@ -9,7 +9,7 @@ Oppgåva består av følgjande delar, som ligg inne i kvar sin pakke.
 - [Del 2](src/main/java/part2/part2_nn.md) 
 - [Del 3](src/main/java/part3/part3_nn.md) 
 - [Del 4](src/main/java/part4/part4_nn.md) 
-- [Del 4](src/main/java/part5/part5_nn.md) 
+- [Del 5](src/main/java/part5/part5_nn.md) 
 
 ## Oppgåveformat
 

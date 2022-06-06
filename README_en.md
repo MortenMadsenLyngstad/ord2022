@@ -9,7 +9,7 @@ This exam consists of the following parts, contained within separate packages:
 - [Del 2](src/main/java/part2/part2_en.md) 
 - [Del 3](src/main/java/part3/part3_en.md) 
 - [Del 4](src/main/java/part4/part4_en.md) 
-- [Del 4](src/main/java/part5/part5_en.md)
+- [Del 5](src/main/java/part5/part5_en.md)
 
 
 ## Organization
