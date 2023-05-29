@@ -1,17 +1,21 @@
 package part2;
 
+import java.util.ArrayList;
+import java.util.EmptyStackException;
+import java.util.List;
+
 /**
  * A stack of integers that is decreasing in size.
  */
 public class DecreasingStack {
 
-	// TODO: fields
+	private List<Integer> stack = new ArrayList<>();
 
 	/**
 	 * Initializes this DecreasingStack with the provided element.
 	 */
 	public DecreasingStack(final int firstValue) {
-		// TODO
+		stack.add(firstValue);
 	}
 
 	/**
@@ -22,7 +26,10 @@ public class DecreasingStack {
 	 * @return true if element is successfully pushed, false otherwise
 	 */
 	public boolean push(final int element) {
-		// TODO
+		if (element < peek() || stack.isEmpty()) {
+			stack.add(element);
+			return true;
+		}
 		return false;
 	}
 
@@ -33,8 +40,10 @@ public class DecreasingStack {
 	 * @throws an appropriate subclass of RuntimeException if is stack is empty.
 	 */
 	public int pop() {
-		// TODO
-		return 0;
+		if (stack.isEmpty()) {
+			throw new IllegalStateException("Stack is empty");
+		}
+		return stack.remove(stack.size() - 1);
 	}
 
 	/**
@@ -44,22 +53,22 @@ public class DecreasingStack {
 	 * @throws an appropriate subclass of RuntimeException if is stack is empty.
 	 */
 	public int peek() {
-		// TODO
-		return 0;
+		if (stack.isEmpty()) {
+			throw new EmptyStackException();
+		}
+		return stack.get(stack.size() - 1);
 	}
 
 	@Override
 	public String toString() {
-		// TODO
-		return null;
+		return "DecreasingStack [stack=" + stack + "]";
 	}
 
 	/**
 	 * @return true if stack is empty, false otherwise
 	 */
 	public boolean isEmpty() {
-		// TODO
-		return false;
+		return stack.isEmpty();
 	}
 
 	// for your own use
@@ -76,7 +85,7 @@ public class DecreasingStack {
 			System.out.println("Cannot push 5");
 		}
 
-		while (! ds.isEmpty()) {
+		while (!ds.isEmpty()) {
 			System.out.println(ds.pop());
 		}
 
@@ -84,4 +93,3 @@ public class DecreasingStack {
 		ds.peek();
 	}
 }
-

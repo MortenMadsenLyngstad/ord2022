@@ -12,16 +12,21 @@ import java.util.List;
  *
  * Some background concerning the latter:
  * In basketball, true shooting percentage is an advanced statistic that
- * measures a player's efficiency at shooting the ball. It is intended to more accurately
- * calculate a player's shooting than field goal percentage, free throw percentage, and
- * three-point field goal percentage taken individually. Two- and three-point field goals and
+ * measures a player's efficiency at shooting the ball. It is intended to more
+ * accurately
+ * calculate a player's shooting than field goal percentage, free throw
+ * percentage, and
+ * three-point field goal percentage taken individually. Two- and three-point
+ * field goals and
  * free throws are all considered in its calculation. It is abbreviated TS%.
  *
  * TS% = pointsScored / 2 x (fieldGoalAttempts + (0.44 x freeThrowAttempts))
  * Example for a player's first game:
- *  fieldGoalAttempts = 20, freeThrowAttempts = 5, pointsScored = 38 => TS% = 0.8559 = 85.59%
+ * fieldGoalAttempts = 20, freeThrowAttempts = 5, pointsScored = 38 => TS% =
+ * 0.8559 = 85.59%
  * Example for the same player's second game:
- *  fieldGoalAttemps = 1, freeThrowAttemps = 0, pointsScored = 3 => trueShootingPercentage = 1.5 = 150%
+ * fieldGoalAttemps = 1, freeThrowAttemps = 0, pointsScored = 3 =>
+ * trueShootingPercentage = 1.5 = 150%
  *
  * Season average true shooting percentage for this player (two matches):
  * (38 + 3) / 2 x ((20 + 1) + (0.44 x (5 + 0)) = 0.8836 = 88.36%
@@ -31,30 +36,56 @@ public class BasketballComparators {
 
 	/**
 	 * @return a comparator that compares athletes based on their height. Using this
-	 *          comparator, a player with height 220 will rank before a player with height 205.
+	 *         comparator, a player with height 220 will rank before a player with
+	 *         height 205.
 	 */
 	public static Comparator<Player> getHeightComparator() {
-		// TODO
-		return null;
+		return (Player p1, Player p2) -> {
+			return p2.getHeight() - p1.getHeight();
+		};
+	}
+
+	private static double getScore(Player p1) {
+		List<PlayerGameStat> p1Stats = p1.getSeasonStats();
+
+		int p1PointsScored = p1Stats.stream()
+				.map(PlayerGameStat::getPointsScored)
+				.reduce(0, (total, element) -> total + element);
+
+		int p1FieldGoalAttempts = p1Stats.stream()
+				.map(PlayerGameStat::getFieldGoalAttempts)
+				.reduce(0, (total, element) -> total + element);
+
+		int p1FreeThrowAttempts = p1Stats.stream()
+				.map(PlayerGameStat::getFreeThrowAttempts)
+				.reduce(0, (total, element) -> total + element);
+
+		return p1PointsScored / (2 * (p1FieldGoalAttempts + (0.44 * p1FreeThrowAttempts)));
 	}
 
 	/**
 	 * @return A comparator that compares basketball players based on
-	 *          their season average true shooting percentage.
-	 *          The comparator will be used for sorting players based on
-	 *          putting the player with the highest season average true shooting percentage first.
+	 *         their season average true shooting percentage.
+	 *         The comparator will be used for sorting players based on
+	 *         putting the player with the highest season average true shooting
+	 *         percentage first.
 	 *
-	 *          If two players have equal season average true shooting percentage,
-	 *          they should be compared alphabetically by name.
+	 *         If two players have equal season average true shooting percentage,
+	 *         they should be compared alphabetically by name.
 	 *
 	 */
 	public static Comparator<Player> getTrueShootingPercentageComparator() {
-		// TODO
-		return null;
+		return (Player p1, Player p2) -> {
+			if (getScore(p1) == getScore(p2)) {
+				return p1.getName().compareTo(p2.getName());
+			} else {
+				return Double.compare(getScore(p1), getScore(p2)) * -1;
+			}
+		};
 	}
 
 	public static void main(String[] args) {
-		//Disclaimer: The names and statistics below are just made up
+		// Disclaimer: The names and statistics below are just made up
 
 		PlayerGameStat stat11 = new PlayerGameStat(38, 20, 5);
 		PlayerGameStat stat12 = new PlayerGameStat(3, 1, 0);

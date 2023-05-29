@@ -1,21 +1,25 @@
 package part2;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.EmptyStackException;
 import java.util.List;
 
 /**
- * DecreasingStacks is a class that manages an ordered list of {@link DecreasingStack} instances
+ * DecreasingStacks is a class that manages an ordered list of
+ * {@link DecreasingStack} instances
  * None of the stacks are allowed to be empty.
  */
 public class DecreasingStacks {
 
 	// TOOO: fields
+	private List<DecreasingStack> stacks = new ArrayList<>();
 
 	/**
 	 * @return true if all stacks (if any) are empty
 	 */
 	public boolean isEmpty() {
-		// TODO
-		return false;
+		return stacks.isEmpty();
 	}
 
 	/**
@@ -26,7 +30,17 @@ public class DecreasingStacks {
 	 * @param element the element to push
 	 */
 	public void push(final int element) {
-		// TODO
+		List<DecreasingStack> suitableStack = stacks.stream().filter(s -> s.push(element)).toList();
+
+		if (suitableStack.isEmpty()) {
+			stacks.add(new DecreasingStack(element));
+		} else {
+			for (int i = 0; i < stacks.size(); i++) {
+				if (stacks.get(i) == suitableStack) {
+					stacks.get(i).push(element);
+				}
+			}
+		}
 	}
 
 	/**
@@ -34,19 +48,36 @@ public class DecreasingStacks {
 	 */
 	@Override
 	public String toString() {
-		// TODO
-		return null;
+		StringBuilder sb = new StringBuilder();
+		for (DecreasingStack decreasingStack : stacks) {
+			sb.append(decreasingStack + "\n");
+		}
+
+		return sb.toString();
 	}
 
 	/**
 	 * Remove and return the smallest element across all stacks.
 	 *
 	 * @return (and remove) the element from the stacks that is smalles
-	 * @throws an appropriate subclass of RuntimeException if no element can be popped
+	 * @throws an appropriate subclass of RuntimeException if no element can be
+	 *            popped
 	 */
 	public int pop() {
-		// TODO
-		return 0;
+		final DecreasingStack smallest = stacks.stream()
+				.min(Comparator.comparing(DecreasingStack::peek))
+				.get();
+
+		if (smallest.isEmpty()) {
+			throw new EmptyStackException();
+		}
+
+		final int result = smallest.pop();
+		if (smallest.isEmpty()) {
+			stacks.remove(smallest);
+		}
+		return result;
+
 	}
 
 	/**
@@ -55,15 +86,19 @@ public class DecreasingStacks {
 	 * The elements are also removed from this DecreasingStacks.
 	 */
 	public List<Integer> popAll() {
-		// TODO
-		return null;
+		final List<Integer> poppedElements = new ArrayList<>();
+
+		for (DecreasingStack stack : stacks) {
+			poppedElements.add(stack.pop());
+		}
+		return poppedElements;
 	}
 
 	// for your own use
 
 	public static void main(final String[] args) {
 		final DecreasingStacks stacks = new DecreasingStacks();
-		List.of(5,3,8,2,1,4,4,7,6).forEach(stacks::push);
+		List.of(5, 3, 8, 2, 1, 4, 4, 7, 6).forEach(stacks::push);
 		System.out.println(stacks.toString());
 		// Should print
 		// [5, 3, 2, 1]
@@ -76,4 +111,3 @@ public class DecreasingStacks {
 		// [1, 2, 3, 4, 4, 5, 6, 7, 8]
 	}
 }
-
