@@ -11,10 +11,62 @@ import java.util.List;
 
 public class CharCounterImpl2 implements CharCounter {
 
-	private int sumCountedChars = 0;
-	private String countedChars = "";
-	private final List<Integer> counters = new ArrayList<>();
+	// private int sumCountedChars = 0;
+	// private String countedChars = "";
+	// private final List<Integer> counters = new ArrayList<>();
 
+
+	// @Override
+	// public boolean acceptsChar(final char c) {
+	// 	return Character.isLetter(c);
+	// }
+
+	// @Override
+	// public void countChar(final char c, final int increment) throws IllegalArgumentException {
+	// 	if (!acceptsChar(c)) {
+	// 		throw new IllegalArgumentException("char not accepted");
+	// 	}
+	// 	if (increment <= 1) {
+	// 		throw new IllegalArgumentException("increment must be >= 1");
+	// 	}
+	// 	final int pos = countedChars.indexOf(c);
+	// 	if (pos >= 0) {
+	// 		counters.set(pos, counters.get(pos) + increment);
+	// 	}
+	// 	else {
+	// 		countedChars += c;
+	// 		counters.add(increment);
+	// 	}
+	// 	sumCountedChars += increment;
+	// }
+
+	// @Override
+	// public Collection<Character> getCountedChars() {
+	// 	final Collection<Character> chars = new ArrayList<>(countedChars.length());
+
+	// 	for (int i = 0; i < countedChars.length(); i++) {
+	// 		chars.add(countedChars.charAt(i));
+	// 	}
+	// 	return chars;
+	// }
+
+	// @Override
+	// public int getCharCount(final char c) {
+	// 	return (countedChars.indexOf(c) >= 0) ? counters.get(countedChars.indexOf(c)) : 0;
+	// }
+
+	// @Override
+	// public int getTotalCharCount() {
+	// 	return sumCountedChars;
+	// }
+
+
+	/**
+	 ** Alternative method from youtube;
+	 */
+
+	private List<Character> chars = new ArrayList<>();
+	private List<Integer> charCount = new ArrayList<>();
 
 	@Override
 	public boolean acceptsChar(final char c) {
@@ -24,44 +76,43 @@ public class CharCounterImpl2 implements CharCounter {
 	@Override
 	public void countChar(final char c, final int increment) throws IllegalArgumentException {
 		if (!acceptsChar(c)) {
-			throw new IllegalArgumentException("char not accepted");
+			throw new IllegalArgumentException("Count of '" + c + "' is not supported");
 		}
-		if (increment <= 1) {
-			throw new IllegalArgumentException("increment must be >= 1");
+		if (increment < 1) {
+			throw new IllegalArgumentException("Increment must be >= 1");
 		}
-		final int pos = countedChars.indexOf(c);
-		if (pos >= 0) {
-			counters.set(pos, counters.get(pos) + increment);
+		int index = chars.indexOf(c);
+
+		if (index == -1) {
+			chars.add(c);
+			charCount.add(increment);
+		} else {
+			charCount.set(index, charCount.get(index) + increment);
 		}
-		else {
-			countedChars += c;
-			counters.add(increment);
-		}
-		sumCountedChars += increment;
 	}
 
 	@Override
 	public Collection<Character> getCountedChars() {
-		final Collection<Character> chars = new ArrayList<>(countedChars.length());
-
-		for (int i = 0; i < countedChars.length(); i++) {
-			chars.add(countedChars.charAt(i));
-		}
-		return chars;
+		return new ArrayList<>(chars);
 	}
 
 	@Override
 	public int getCharCount(final char c) {
-		return (countedChars.indexOf(c) >= 0) ? counters.get(countedChars.indexOf(c)) : 0;
+		int index = chars.indexOf(c);
+
+		if (index == -1) {
+			return 0;
+		} else {
+			return charCount.get(index);
+		}
 	}
 
 	@Override
 	public int getTotalCharCount() {
-		return sumCountedChars;
+		return charCount.stream().mapToInt(c -> c).sum();
 	}
 
 	public static void main(String[] args) {
-		
 		final CharCounterImpl2 counter = new CharCounterImpl2();
 		System.out.println(counter.acceptsChar('A')); // true
 		System.out.println(counter.acceptsChar('1')); // false
@@ -71,5 +122,4 @@ public class CharCounterImpl2 implements CharCounter {
 		System.out.println(counter.getTotalCharCount()); // 5
 		System.out.println(counter.getCountedChars()); // [A, B]
 	}
-
 }

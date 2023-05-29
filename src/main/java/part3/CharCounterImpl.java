@@ -14,6 +14,7 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+
 public class CharCounterImpl implements CharCounter {
 
 	private final Predicate<Character> acceptedChars;

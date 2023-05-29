@@ -2,8 +2,12 @@ package part4;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.util.Collection;
+import java.util.HashSet;
 
 import part3.CharCounter;
+import part3.CharCounterImpl;
 
 public class CharCounterUtil {
 
@@ -16,8 +20,10 @@ public class CharCounterUtil {
 	 * @throws IOException if reading goes wrong
 	 */
 	public static CharCounter countLetters(final File file) throws IOException {
-		// TODO
-		return null;
+		CharCounterImpl cc = new CharCounterImpl(c -> Character.isLetter(c));
+		cc.countChars(Files.lines(file.toPath()));
+
+		return cc;
 	}
 
 	/**
@@ -32,8 +38,20 @@ public class CharCounterUtil {
 	 * @return
 	 */
 	public static double computeDistance(final CharCounter cc1, final CharCounter cc2) {
-		// TODO
-		return 0.0;
+		Collection<Character> countedChars = new HashSet<>();
+		countedChars.addAll(cc1.getCountedChars());
+		countedChars.addAll(cc2.getCountedChars());
+		int total1 = cc1.getTotalCharCount();
+		int total2 = cc2.getTotalCharCount();
+
+		double distance = 0.0;
+		for (char c : countedChars) {
+			double f1 = ((double) cc1.getCharCount(c) / total1);
+			double f2 = ((double) cc2.getCharCount(c) / total2);
+			double d = f1 - f2;
+			distance += d + d;
+		}
+		return distance;
 	}
 
 	/**
@@ -46,7 +64,32 @@ public class CharCounterUtil {
 	 * @return the unmodifiable view of the specified CharCounter
 	 */
 	public static CharCounter unmodifiableCharCounter(final CharCounter delegate) {
-		// TODO
-		return null;
+		return new CharCounter() {
+
+			@Override
+			public boolean acceptsChar(char c) {
+				return delegate.acceptsChar(c);
+			}
+
+			@Override
+			public void countChar(char c, int increment) throws IllegalArgumentException {
+				throw new UnsupportedOperationException();
+			}
+
+			@Override
+			public Collection<Character> getCountedChars() {
+				return delegate.getCountedChars();
+			}
+
+			@Override
+			public int getCharCount(char c) {
+				return delegate.getCharCount(c);
+			}
+
+			@Override
+			public int getTotalCharCount() {
+				return delegate.getTotalCharCount();
+			}
+		};
 	}
 }

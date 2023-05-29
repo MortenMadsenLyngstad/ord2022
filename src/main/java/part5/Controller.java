@@ -12,6 +12,10 @@ public class Controller {
 	@FXML
 	void handleKvadrer() {
 		final String s = innput.getText();
-		// TODO
+		System.out.println(s);
 	}
+
+	/**	
+	 * ! Skal ikke kunne FXML på eksamen - gjør dermed ikke denne oppgaven
+	 */
 }

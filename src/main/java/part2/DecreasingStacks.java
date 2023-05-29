@@ -1,8 +1,6 @@
 package part2;
 
 import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.EmptyStackException;
 import java.util.List;
 
 /**
@@ -30,17 +28,12 @@ public class DecreasingStacks {
 	 * @param element the element to push
 	 */
 	public void push(final int element) {
-		List<DecreasingStack> suitableStack = stacks.stream().filter(s -> s.push(element)).toList();
-
-		if (suitableStack.isEmpty()) {
-			stacks.add(new DecreasingStack(element));
-		} else {
-			for (int i = 0; i < stacks.size(); i++) {
-				if (stacks.get(i) == suitableStack) {
-					stacks.get(i).push(element);
-				}
+		for (DecreasingStack decreasingStack : stacks) {
+			if(decreasingStack.push(element)) {
+				return;
 			}
 		}
+		stacks.add(new DecreasingStack(element));
 	}
 
 	/**
@@ -48,12 +41,12 @@ public class DecreasingStacks {
 	 */
 	@Override
 	public String toString() {
-		StringBuilder sb = new StringBuilder();
-		for (DecreasingStack decreasingStack : stacks) {
-			sb.append(decreasingStack + "\n");
-		}
+		String out = "";
 
-		return sb.toString();
+		for (DecreasingStack stack : stacks) {
+			out += stack.toString() + "\n";
+		}
+		return out;
 	}
 
 	/**
@@ -64,15 +57,17 @@ public class DecreasingStacks {
 	 *            popped
 	 */
 	public int pop() {
-		final DecreasingStack smallest = stacks.stream()
-				.min(Comparator.comparing(DecreasingStack::peek))
-				.get();
-
-		if (smallest.isEmpty()) {
-			throw new EmptyStackException();
+		if (isEmpty()) {
+			throw new IllegalStateException();
 		}
-
-		final int result = smallest.pop();
+		DecreasingStack smallest = stacks.get(0);
+		for (int i = 1; i < stacks.size(); i++) {
+			if (smallest.peek() > stacks.get(i).peek()) {
+				smallest = stacks.get(i);
+			}
+			
+		}
+		int result = smallest.pop();
 		if (smallest.isEmpty()) {
 			stacks.remove(smallest);
 		}
@@ -86,10 +81,10 @@ public class DecreasingStacks {
 	 * The elements are also removed from this DecreasingStacks.
 	 */
 	public List<Integer> popAll() {
-		final List<Integer> poppedElements = new ArrayList<>();
+		List<Integer> poppedElements = new ArrayList<>();
 
-		for (DecreasingStack stack : stacks) {
-			poppedElements.add(stack.pop());
+		while(!isEmpty()) {
+			poppedElements.add(this.pop());
 		}
 		return poppedElements;
 	}
